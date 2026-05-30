@@ -1,0 +1,277 @@
+---
+// All wedding content sections — revealed after guest code entry
+---
+<div id="wedding-content" class="hidden">
+
+  <!-- ============ Our Story ============ -->
+  <section id="our-story" class="content-section py-20 px-4 bg-cream">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="font-body text-red-wine text-xs tracking-[0.3em] uppercase mb-3">Our Story</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-brown-dark mb-6">How It All Began</h2>
+      <div class="ornament-divider mb-8">
+        <div class="ornament-line"></div>
+        <svg class="w-3.5 h-3.5 text-gold flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8,0 L10,6 L16,8 L10,10 L8,16 L6,10 L0,8 L6,6Z" />
+        </svg>
+        <div class="ornament-line"></div>
+      </div>
+      <p class="font-body text-brown-medium text-lg leading-relaxed mb-5">
+        It started with a chance encounter at a small bookshop in the heart of the city. Netra was reaching for the same novel as Julien, and what could have been a simple apology turned into a conversation that lasted hours.
+      </p>
+      <p class="font-body text-brown-medium text-lg leading-relaxed mb-5">
+        From that day forward, they became inseparable — sharing morning coffees, sunset walks, and a love for discovering hidden corners of the world. After three wonderful years of adventures together, Julien proposed under a canopy of stars during a trip to the Italian countryside.
+      </p>
+      <p class="font-body text-brown-medium text-lg leading-relaxed">
+        Now, they can't wait to celebrate this next chapter surrounded by the people they love most.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Schedule ============ -->
+  <section id="schedule" class="content-section py-20 px-4 bg-beige">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="font-body text-red-wine text-xs tracking-[0.3em] uppercase mb-3">The Day</p>
+        <h2 class="font-display text-3xl sm:text-4xl text-brown-dark mb-6">Wedding Day Schedule</h2>
+        <div class="ornament-divider">
+          <div class="ornament-line"></div>
+          <svg class="w-3.5 h-3.5 text-gold flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8,0 L10,6 L16,8 L10,10 L8,16 L6,10 L0,8 L6,6Z" />
+          </svg>
+          <div class="ornament-line"></div>
+        </div>
+      </div>
+
+      <div class="space-y-0">
+        {[
+          { time: '4:00 PM', title: 'Grand Entrance', desc: 'Guests arrive and are welcomed with signature cocktails and light bites.' },
+          { time: '4:30 PM', title: 'Ceremony', desc: 'The exchange of vows in the garden pavilion, surrounded by family and friends.' },
+          { time: '5:30 PM', title: 'Cocktail Hour', desc: 'Hors d\'oeuvres, live acoustic music, and mingling on the terrace.' },
+          { time: '6:30 PM', title: 'Dinner', desc: 'A seated dinner under the stars with a curated seasonal menu.' },
+          { time: '8:00 PM', title: 'Dancing', desc: 'First dance, toasts, cake cutting, and an evening of celebration.' },
+          { time: '10:00 PM', title: 'Sparkler Send-Off', desc: 'A magical farewell as the newlyweds depart through a tunnel of sparklers.' },
+        ].map((item, i) => (
+          <div class="flex gap-6 py-5 border-b border-sand/60 last:border-b-0">
+            <div class="flex-shrink-0 w-20 text-right pt-0.5">
+              <span class="font-body text-sm text-red-wine tracking-wide">{item.time}</span>
+            </div>
+            <div class="flex-shrink-0 flex flex-col items-center">
+              <div class="w-2.5 h-2.5 rounded-full border-2 border-gold bg-off-white mt-1"></div>
+              {i < 5 && <div class="w-px flex-1 bg-sand/50"></div>}
+            </div>
+            <div class="pb-1">
+              <h3 class="font-display text-lg text-brown-dark mb-1">{item.title}</h3>
+              <p class="font-body text-brown-light text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Location ============ -->
+  <section id="location" class="content-section py-20 px-4 bg-cream">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="font-body text-red-wine text-xs tracking-[0.3em] uppercase mb-3">Venue</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-brown-dark mb-6">The Garden Estate</h2>
+      <div class="ornament-divider mb-8">
+        <div class="ornament-line"></div>
+        <svg class="w-3.5 h-3.5 text-gold flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8,0 L10,6 L16,8 L10,10 L8,16 L6,10 L0,8 L6,6Z" />
+        </svg>
+        <div class="ornament-line"></div>
+      </div>
+      <div class="rounded-sm overflow-hidden mb-6 shadow-md">
+        <img
+          src="https://picsum.photos/seed/tuscan-garden-estate-venue/800/400.jpg"
+          alt="The Garden Estate"
+          class="w-full h-48 sm:h-64 object-cover"
+          loading="lazy"
+        />
+      </div>
+      <p class="font-body text-brown-medium text-lg leading-relaxed mb-1">Via delle Rose, 42</p>
+      <p class="font-body text-brown-medium text-lg leading-relaxed mb-6">53100 Siena SI, Tuscany, Italy</p>
+      <a
+        href="#"
+        class="inline-block px-7 py-2.5 border border-gold text-brown-dark font-body text-sm tracking-[0.12em] uppercase transition-all duration-300 hover:bg-gold hover:text-off-white"
+      >
+        Get Directions
+      </a>
+      <div class="mt-8 p-5 bg-beige rounded-sm text-left max-w-md mx-auto">
+        <p class="font-body text-brown-light text-sm leading-relaxed">
+          <span class="font-medium text-brown-medium">Parking:</span> Complimentary valet parking available on-site. Self-parking is also available in the east lot.
+        </p>
+        <p class="font-body text-brown-light text-sm leading-relaxed mt-2">
+          <span class="font-medium text-brown-medium">Shuttle:</span> A complimentary shuttle will run from Hotel Palazzo to the venue starting at 3:15 PM.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Dress Code ============ -->
+  <section id="dress-code" class="content-section py-20 px-4 bg-beige">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="font-body text-red-wine text-xs tracking-[0.3em] uppercase mb-3">Attire</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-brown-dark mb-6">Dress Code</h2>
+      <div class="ornament-divider mb-8">
+        <div class="ornament-line"></div>
+        <svg class="w-3.5 h-3.5 text-gold flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8,0 L10,6 L16,8 L10,10 L8,16 L6,10 L0,8 L6,6Z" />
+        </svg>
+        <div class="ornament-line"></div>
+      </div>
+      <p class="font-display text-2xl text-gold italic mb-6">Garden Formal</p>
+      <p class="font-body text-brown-medium text-lg leading-relaxed mb-10">
+        We kindly ask our guests to dress in garden formal attire. Think elegant and refined, with soft fabrics and muted tones that complement the natural beauty of our venue.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left max-w-lg mx-auto">
+        <div class="p-5 bg-cream rounded-sm">
+          <h3 class="font-display text-base text-brown-dark mb-3 text-center">Gentlemen</h3>
+          <ul class="font-body text-sm text-brown-medium space-y-2">
+            <li class="flex items-start gap-2"><span class="text-gold mt-0.5 text-xs">&#10022;</span><span>Linen or cotton suit in earth tones</span></li>
+            <li class="flex items-start gap-2"><span class="text-gold mt-0.5 text-xs">&#10022;</span><span>Muted palette — olive, navy, tan</span></li>
+            <li class="flex items-start gap-2"><span class="text-gold mt-0.5 text-xs">&#10022;</span><span>Dress shoes, no sneakers please</span></li>
+          </ul>
+        </div>
+        <div class="p-5 bg-cream rounded-sm">
+          <h3 class="font-display text-base text-brown-dark mb-3 text-center">Ladies</h3>
+          <ul class="font-body text-sm text-brown-medium space-y-2">
+            <li class="flex items-start gap-2"><span class="text-gold mt-0.5 text-xs">&#10022;</span><span>Midi or floor-length dress</span></li>
+            <li class="flex items-start gap-2"><span class="text-gold mt-0.5 text-xs">&#10022;</span><span>Soft pastels or jewel tones</span></li>
+            <li class="flex items-start gap-2"><span class="text-gold mt-0.5 text-xs">&#10022;</span><span>Please avoid white or ivory</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Registry ============ -->
+  <section id="registry" class="content-section py-20 px-4 bg-cream">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="font-body text-red-wine text-xs tracking-[0.3em] uppercase mb-3">Gifts</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-brown-dark mb-6">Gift Registry</h2>
+      <div class="ornament-divider mb-8">
+        <div class="ornament-line"></div>
+        <svg class="w-3.5 h-3.5 text-gold flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8,0 L10,6 L16,8 L10,10 L8,16 L6,10 L0,8 L6,6Z" />
+        </svg>
+        <div class="ornament-line"></div>
+      </div>
+      <p class="font-body text-brown-medium text-lg leading-relaxed mb-10">
+        Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, we've registered at the following.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-xl mx-auto">
+        {[
+          { name: 'Crate & Barrel', icon: '&#127968;' },
+          { name: 'Anthropologie', icon: '&#127800;' },
+          { name: 'Honeymoon Fund', icon: '&#9992;&#65039;' },
+        ].map((item) => (
+          <a
+            href="#"
+            class="group p-6 bg-beige rounded-sm border border-sand hover:border-gold transition-all duration-300 hover:shadow-md block"
+          >
+            <span class="text-2xl mb-3 block" set:html={item.icon} />
+            <span class="font-body text-sm text-brown-medium group-hover:text-red-warm transition-colors duration-200 tracking-wide">
+              {item.name}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Accessibility ============ -->
+  <section id="accessibility" class="content-section py-20 px-4 bg-beige">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="font-body text-red-wine text-xs tracking-[0.3em] uppercase mb-3">Accessibility</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-brown-dark mb-6">Making Everyone Comfortable</h2>
+      <div class="ornament-divider mb-8">
+        <div class="ornament-line"></div>
+        <svg class="w-3.5 h-3.5 text-gold flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8,0 L10,6 L16,8 L10,10 L8,16 L6,10 L0,8 L6,6Z" />
+        </svg>
+        <div class="ornament-line"></div>
+      </div>
+      <div class="space-y-4 text-left max-w-lg mx-auto">
+        {[
+          { title: 'Wheelchair Access', desc: 'All event areas are wheelchair accessible with paved pathways and ramp access throughout the estate.' },
+          { title: 'Reserved Seating', desc: 'Accessible seating is available in both the ceremony and reception areas. Please note your needs on your RSVP.' },
+          { title: 'Hearing Assistance', desc: 'A hearing loop system will be available in the ceremony pavilion.' },
+          { title: 'Quiet Room', desc: 'A quiet, low-stimulation room is available for anyone who needs a break from the festivities.' },
+          { title: 'Dietary Needs', desc: 'Please include any dietary requirements or allergies in your RSVP card and we will accommodate them.' },
+        ].map((item) => (
+          <div class="flex gap-4 p-4 bg-cream rounded-sm">
+            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center mt-0.5">
+              <span class="text-gold text-xs">&#10022;</span>
+            </div>
+            <div>
+              <h3 class="font-display text-base text-brown-dark mb-1">{item.title}</h3>
+              <p class="font-body text-sm text-brown-light leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="font-body text-brown-light text-sm mt-6 leading-relaxed">
+        If you have any specific needs not listed here, please contact us at
+        <a href="mailto:accessibility@netraandjulien.com" class="text-red-warm hover:text-red-wine transition-colors underline underline-offset-2">
+          accessibility@netraandjulien.com
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Contact ============ -->
+  <section id="contact" class="content-section py-20 px-4 bg-cream">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="font-body text-red-wine text-xs tracking-[0.3em] uppercase mb-3">Get in Touch</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-brown-dark mb-6">Contact Us</h2>
+      <div class="ornament-divider mb-8">
+        <div class="ornament-line"></div>
+        <svg class="w-3.5 h-3.5 text-gold flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8,0 L10,6 L16,8 L10,10 L8,16 L6,10 L0,8 L6,6Z" />
+        </svg>
+        <div class="ornament-line"></div>
+      </div>
+      <p class="font-body text-brown-medium text-lg leading-relaxed mb-10">
+        Have questions? We'd love to hear from you.
+      </p>
+      <div class="space-y-4 max-w-sm mx-auto">
+        <div class="p-5 bg-beige rounded-sm">
+          <p class="font-body text-[10px] text-brown-light tracking-[0.2em] uppercase mb-1">Wedding Planner</p>
+          <p class="font-display text-lg text-brown-dark">Sophia Laurent</p>
+          <a href="mailto:sophia@netraandjulien.com" class="font-body text-sm text-red-warm hover:text-red-wine transition-colors">
+            sophia@netraandjulien.com
+          </a>
+        </div>
+        <div class="p-5 bg-beige rounded-sm">
+          <p class="font-body text-[10px] text-brown-light tracking-[0.2em] uppercase mb-1">Day-of Coordinator</p>
+          <p class="font-display text-lg text-brown-dark">Marco Bianchi</p>
+          <a href="tel:+390123456789" class="font-body text-sm text-red-warm hover:text-red-wine transition-colors">
+            +39 012 345 6789
+          </a>
+        </div>
+        <div class="p-5 bg-beige rounded-sm">
+          <p class="font-body text-[10px] text-brown-light tracking-[0.2em] uppercase mb-1">General Inquiries</p>
+          <a href="mailto:hello@netraandjulien.com" class="font-body text-sm text-red-warm hover:text-red-wine transition-colors">
+            hello@netraandjulien.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Footer ============ -->
+  <footer class="py-10 px-4 bg-brown-dark text-center">
+    <p class="font-display text-xl text-off-white/90 tracking-wide mb-2">
+      Netra <span class="text-red-light">&</span> Julien
+    </p>
+    <p class="font-body text-sm text-off-white/50 tracking-[0.12em]">
+      June 6th, 2027 &middot; Tuscany, Italy
+    </p>
+    <div class="flex items-center justify-center my-6">
+      <div class="h-px w-24" style="background: linear-gradient(to right, transparent, rgba(255,253,249,0.2), transparent)"></div>
+    </div>
+    <p class="font-body text-xs text-off-white/30 tracking-wider">Made with love</p>
+  </footer>
+
+</div>

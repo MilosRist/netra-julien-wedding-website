@@ -1,11 +1,237 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import HeroSection from '../components/HeroSection.astro';
+import LandingSection from '../components/LandingSection.astro';
+import GuestCodeSection from '../components/GuestCodeSection.astro';
+import NavigationMenu from '../components/NavigationMenu.astro';
+import WeddingContent from '../components/WeddingContent.astro';
 ---
 
 <Layout>
-	<Welcome />
+  <!-- Navigation — slides down after guest code is entered -->
+  <NavigationMenu />
+
+  <!-- Hero — fixed full-screen background, blurs on scroll -->
+  <HeroSection />
+
+  <!-- Scrollable main content (sits behind hero, revealed as hero blurs) -->
+  <main class="relative z-10">
+    <!-- Spacer equal to viewport height so landing content starts below hero -->
+    <div class="h-screen" aria-hidden="true"></div>
+
+    <LandingSection />
+    <GuestCodeSection />
+    <WeddingContent />
+  </main>
 </Layout>
+
+<script>
+  // =============================================
+  // CONFIG — Change the guest code here
+  // =============================================
+  const VALID_GUEST_CODE = 'netra2027';
+
+  // =============================================
+  // Hero blur-on-scroll
+  // =============================================
+  const hero = document.getElementById('hero');
+  const blurRange = Math.min(window.innerHeight * 0.85, 750);
+  let ticking = false;
+
+  function updateHero() {
+    if (!hero) return;
+    const progress = Math.min(window.scrollY / blurRange, 1);
+    const blur = progress * 22;
+    const opacity = 1 - progress * 0.85;
+    const scale = 1 + progress * 0.06;
+
+    hero.style.filter = `blur(${blur}px)`;
+    hero.style.opacity = String(opacity);
+    hero.style.transform = `scale(${scale})`;
+    hero.style.pointerEvents = blur > 4 ? 'none' : 'auto';
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateHero);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // =============================================
+  // Portrait fly-in (Intersection Observer)
+  // =============================================
+  const portraitObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          portraitObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  document.querySelectorAll('.portrait-left, .portrait-right').forEach((el) => {
+    portraitObserver.observe(el);
+  });
+
+  // =============================================
+  // Generic fade-up elements
+  // =============================================
+  const fadeObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -20px 0px' }
+  );
+
+  document.querySelectorAll('.fade-up').forEach((el) => fadeObserver.observe(el));
+
+  // =============================================
+  // Guest code form logic
+  // =============================================
+  const form = document.getElementById('guest-code-form') as HTMLFormElement | null;
+  const input = document.getElementById('guest-code-input') as HTMLInputElement | null;
+  const errorEl = document.getElementById('guest-code-error');
+  const formWrap = document.getElementById('guest-code-form-wrap');
+  const welcomeEl = document.getElementById('guest-welcome');
+  const mainNav = document.getElementById('main-nav');
+  const weddingContent = document.getElementById('wedding-content');
+
+  function unlockSite() {
+    // 1. Slide in navigation
+    if (mainNav) mainNav.classList.add('active');
+
+    // 2. Swap form for welcome message
+    if (formWrap) formWrap.style.display = 'none';
+    if (welcomeEl) {
+      welcomeEl.classList.remove('hidden');
+      welcomeEl.style.opacity = '0';
+      welcomeEl.style.transform = 'translateY(16px)';
+      requestAnimationFrame(() => {
+        welcomeEl.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        welcomeEl.style.opacity = '1';
+        welcomeEl.style.transform = 'translateY(0)';
+      });
+    }
+
+    // 3. Reveal wedding content container
+    if (weddingContent) {
+      weddingContent.classList.remove('hidden');
+      weddingContent.style.opacity = '0';
+      requestAnimationFrame(() => {
+        weddingContent.style.transition = 'opacity 0.8s ease 0.15s';
+        weddingContent.style.opacity = '1';
+      });
+
+      // 4. Stagger-reveal individual sections as they scroll into view
+      const sections = weddingContent.querySelectorAll('.content-section');
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const idx = Array.from(sections).indexOf(entry.target);
+              setTimeout(() => entry.target.classList.add('revealed'), idx * 80);
+              sectionObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.04 }
+      );
+      sections.forEach((s) => sectionObserver.observe(s));
+    }
+
+    // 5. Smooth scroll to show the newly-revealed content
+    setTimeout(() => {
+      const codeSection = document.getElementById('guest-code-section');
+      if (codeSection) codeSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 350);
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = input?.value.trim().toLowerCase() ?? '';
+
+      if (code === VALID_GUEST_CODE) {
+        unlockSite();
+      } else {
+        if (errorEl) errorEl.style.opacity = '1';
+        form.classList.add('shake');
+        setTimeout(() => form.classList.remove('shake'), 450);
+        setTimeout(() => { if (errorEl) errorEl.style.opacity = '0'; }, 3500);
+      }
+    });
+  }
+
+  // =============================================
+  // Mobile menu open / close
+  // =============================================
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
+  const mobileClose = document.getElementById('mobile-menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileBackdrop = document.getElementById('mobile-menu-backdrop');
+
+  function openMobile() {
+    mobileMenu?.classList.add('open');
+    if (mobileBackdrop) {
+      mobileBackdrop.classList.remove('hidden');
+      requestAnimationFrame(() => { mobileBackdrop.style.opacity = '1'; });
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobile() {
+    mobileMenu?.classList.remove('open');
+    if (mobileBackdrop) {
+      mobileBackdrop.style.opacity = '0';
+      setTimeout(() => mobileBackdrop.classList.add('hidden'), 300);
+    }
+    document.body.style.overflow = '';
+  }
+
+  mobileToggle?.addEventListener('click', openMobile);
+  mobileClose?.addEventListener('click', closeMobile);
+  mobileBackdrop?.addEventListener('click', closeMobile);
+
+  document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', closeMobile);
+  });
+
+  // =============================================
+  // Smooth-scroll with nav offset
+  // =============================================
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = (anchor as HTMLAnchorElement).getAttribute('href');
+      if (!href) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+
+      const navH = mainNav?.classList.contains('active') ? 56 : 0;
+      const top = target.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  // =============================================
+  // Recalculate blur range on resize
+  // =============================================
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      (window as any).blurRange = Math.min(window.innerHeight * 0.85, 750);
+      updateHero();
+    }, 150);
+  });
+</script>

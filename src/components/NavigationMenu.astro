@@ -1,0 +1,68 @@
+---
+// Fixed navigation bar + mobile sidebar — hidden until guest code is entered
+const links = [
+  { href: '#landing', label: 'Home' },
+  { href: '#our-story', label: 'Our Story' },
+  { href: '#schedule', label: 'Schedule' },
+  { href: '#location', label: 'Location' },
+  { href: '#dress-code', label: 'Dress Code' },
+  { href: '#registry', label: 'Registry' },
+  { href: '#accessibility', label: 'Accessibility' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<!-- ========== Desktop / Top Nav ========== -->
+<nav id="main-nav" class="nav-slide-down fixed top-0 left-0 right-0 z-40 bg-off-white/90 backdrop-blur-md border-b border-sand">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+    <a href="#landing" class="font-display text-lg text-brown-dark tracking-wide">
+      N <span class="text-red-wine">&</span> J
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-7">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="font-body text-sm text-brown-medium tracking-[0.06em] hover:text-red-warm transition-colors duration-200"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="mobile-menu-toggle" class="md:hidden p-2 text-brown-dark cursor-pointer" aria-label="Open menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ========== Mobile backdrop ========== -->
+<div id="mobile-menu-backdrop" class="fixed inset-0 z-40 bg-black/30 hidden opacity-0 transition-opacity duration-300"></div>
+
+<!-- ========== Mobile sidebar ========== -->
+<div id="mobile-menu" class="mobile-menu fixed top-0 right-0 bottom-0 w-72 z-50 bg-off-white shadow-xl">
+  <div class="flex items-center justify-between p-4 border-b border-sand">
+    <span class="font-display text-lg text-brown-dark">
+      N <span class="text-red-wine">&</span> J
+    </span>
+    <button id="mobile-menu-close" class="p-2 text-brown-dark cursor-pointer" aria-label="Close menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+  <div class="flex flex-col py-4">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        class="mobile-nav-link font-body text-base text-brown-medium px-6 py-3.5 hover:bg-beige hover:text-red-warm transition-colors duration-200 tracking-wide"
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+</div>

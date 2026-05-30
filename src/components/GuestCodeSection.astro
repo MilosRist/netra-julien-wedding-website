@@ -1,0 +1,59 @@
+---
+// Guest code input section – transforms into welcome message on success
+---
+<section id="guest-code-section" class="relative py-20 px-4 bg-beige">
+  <div class="max-w-md mx-auto text-center">
+    <!-- Ornament -->
+    <div class="ornament-divider mb-8">
+      <div class="ornament-line"></div>
+      <svg class="w-3.5 h-3.5 text-gold flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8,0 L10,6 L16,8 L10,10 L8,16 L6,10 L0,8 L6,6Z" />
+      </svg>
+      <div class="ornament-line"></div>
+    </div>
+
+    <!-- Form state -->
+    <div id="guest-code-form-wrap">
+      <p class="font-body text-brown-light text-xs tracking-[0.25em] uppercase mb-2">Welcome, dear guest</p>
+      <h2 class="font-display text-3xl sm:text-4xl text-brown-dark mb-3">Enter Your Code</h2>
+      <p class="font-body text-brown-light text-base mb-8 leading-relaxed">
+        Please enter the guest code found on your invitation to access the full wedding details.
+      </p>
+
+      <form id="guest-code-form" class="flex flex-col items-center gap-5">
+        <input
+          type="text"
+          id="guest-code-input"
+          class="guest-input"
+          placeholder="Your guest code"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <div id="guest-code-error" class="text-red-warm text-sm font-body h-5 transition-opacity duration-300 opacity-0">
+          Please check your invitation for the correct code.
+        </div>
+        <button
+          type="submit"
+          class="group relative px-10 py-3 bg-transparent border border-gold text-brown-dark font-body text-sm tracking-[0.18em] uppercase transition-all duration-300 hover:bg-gold hover:text-off-white cursor-pointer"
+        >
+          Continue
+        </button>
+      </form>
+    </div>
+
+    <!-- Welcome state (hidden initially) -->
+    <div id="guest-welcome" class="hidden">
+      <div class="ornament-divider mb-6">
+        <div class="ornament-line"></div>
+        <svg class="w-3.5 h-3.5 text-gold flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8,0 L10,6 L16,8 L10,10 L8,16 L6,10 L0,8 L6,6Z" />
+        </svg>
+        <div class="ornament-line"></div>
+      </div>
+      <p class="font-display text-3xl sm:text-4xl text-brown-dark mb-3">Welcome!</p>
+      <p class="font-body text-brown-medium text-base leading-relaxed">
+        We're so glad you're here.<br />Explore everything below.
+      </p>
+    </div>
+  </div>
+</section>

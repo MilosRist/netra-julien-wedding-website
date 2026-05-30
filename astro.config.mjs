@@ -1,5 +1,10 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';        // import React integration
+import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  integrations: [react()],   // <- top-level, add React
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});
